@@ -1,0 +1,73 @@
+
+@import "@/assets/styles/element-variables.scss";
+// layout
+// sidebar
+$menuText:#bfcbd9; // TODO 待删除
+$menuActiveText: #25c1ff;
+$subMenuActiveText:#409EFF; 
+
+$menuBg: #fff; // TODO 待删除
+$menuHover:#eaf8fe;
+$subMenuBg:#FFFFFF;
+$subMenuHover:#eaf8fe;
+
+$sideBarWidth: 208px;
+$navBarHeight: 72px;
+$statusBarHeight: 32px;
+$headerTotalHeight: 104px;
+$tagviewBarHeight: 40px;
+$centerViewPadding: 4%;
+$centerViewWidth: 92%;
+
+$color-danger: #E60108;
+$color-warning: #ffba00;
+$color-primary: #237ae4;
+$color-success: #00cc69;
+$color-info: #25c1ff;
+
+$blue-chint-primary: #237AE4;
+$blue-chint-info: #25C1FF;
+$green-chint-primary: #00a653;
+$green-chint-info: #00cc69;
+$color-chint-dark: #041b3d;
+
+
+// $color-green-second: #94ff70;
+ $gradient-blue: linear-gradient(to right,$--color-info, $--color-primary);
+ $gradient-green: linear-gradient(to right,$color-chint-green-second, $--color-success);
+
+@mixin chint-blue-menu-on {
+  background-image: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(68,244,255, 1) 0%,
+    rgba(68,244,255, 1) 10%,
+    rgba(68,244,255, 0.5) 50%,
+    rgba(68,244,255, 0) 100%
+  );
+}
+
+@mixin chint-green-menu-on {
+  background-image: radial-gradient(
+    farthest-side at 50% 0%,
+    rgba(143,253,117, 1) 0%,
+    rgba(143,253,117, 1) 10%,
+    rgba(143,253,117, 0.5) 50%,
+    rgba(143,253,117, 0) 100%
+  );
+}
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  // menuText: $menuText;
+  // menuActiveText: $menuActiveText;
+  // subMenuActiveText: $subMenuActiveText;
+  // menuBg: $menuBg;
+  // menuHover: $menuHover;
+  // menuLightBg: $menuLightBg;
+  // menuLightHover: $menuLightHover;
+  // subMenuBg: $subMenuBg;
+  // subMenuHover: $subMenuHover;
+  // sideBarWidth: $sideBarWidth;
+  // sidebarTitle: $sidebarTitle;
+  // sidebarLightTitle: $sidebarLightTitle
+}

@@ -1,0 +1,378 @@
+// @import './variables.scss';
+@import './transition.scss';
+// @import './element-ui.scss';
+@import './layout.scss';
+// @import './chint.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  color: $gray-9;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  background: $--color-page-background;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+* {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: block;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// aside {
+//   background: #eef1f6;
+//   padding: 8px 24px;
+//   margin-bottom: 20px;
+//   border-radius: 2px;
+//   display: block;
+//   line-height: 32px;
+//   font-size: 16px;
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+//   color: #2c3e50;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+
+//   a {
+//     color: #337ab7;
+//     cursor: pointer;
+
+//     &:hover {
+//       color: rgb(32, 160, 255);
+//     }
+//   }
+// }
+
+//main-container全局样式
+.app-container {
+  margin: 24px 24px 0 24px;
+  padding: 24px 24px 12px 24px;
+  background: #ffffff;
+  min-height: calc(100vh - 136px);
+}
+
+.app-nobg-container {
+  margin: 24px 24px 0 24px;
+  // min-height: 100%;  
+  min-height: calc(100% - 136px);
+}
+
+.row-label {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  color: $gray-8;
+}
+
+.components-container {
+  margin: 30px 50px;
+  position: relative;
+}
+
+.pagination-container {
+  margin-top: 8px;
+}
+
+.text-center {
+  text-align: center
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.border-radius-none {
+  border-radius: 0 !important;
+}
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+// update element ui
+// :not(.el-table__body-wrapper) {
+//   &::-webkit-scrollbar {
+//     width: 7px;
+//     height: 7px;
+//   }
+//   &::-webkit-scrollbar, &::-webkit-scrollbar-track-piece {
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     border-radius: 5px;
+//     background-color: rgba(144,146,152,.3);
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     border-radius: 5px;
+//     background-color: rgba(144,146,152,.3);
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     border-radius: 5px;
+//     background-color: rgba(144,146,152,.3);
+//   }
+//   &::-webkit-scrollbar, &::-webkit-scrollbar-track-piece {
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar, &::-webkit-scrollbar-track-piece {
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar, &::-webkit-scrollbar-track-piece {
+//     background-color: transparent;
+//   }
+// }
+
+/** popup 去箭头 **/
+.el-dropdown-menu,
+.el-picker-panel,
+.el-select-dropdown,
+.el-time-panel {
+  margin-top: 4px !important;
+  .popper__arrow {
+    display: none;
+  }
+}
+
+/**Message**/
+.el-message {
+  border-color: $gray-4;
+  box-shadow: $--box-shadow-base;
+}
+
+/** Dialog **/
+.el-dialog {
+  border-radius: $--border-radius-base;
+}
+.el-dialog__header,
+.el-message-box__header {
+  padding: 10px 20px;
+  // height: 42px;
+  // line-height: 42px;
+  border-bottom: 1px solid $gray-4;
+  font-size: 14px;
+  color: #333;
+  overflow: hidden;
+  background-color: $gray-3;
+  border-radius: $--border-radius-base $--border-radius-base 0 0;
+  .el-dialog__title,
+  .el-message-box__title {
+    font-size: 16px;
+  }
+  .el-dialog__headerbtn {
+    top: 15px;
+  }
+  .el-message-box__headerbtn {
+    top: 10px;
+  }
+  .el-message-box__close,
+  .el-dialog__close {
+    color: $gray-7;
+  }
+}
+.el-dialog__footer {
+  padding: 10px 20px;
+  border-top: 1px solid $gray-4;
+  background-color: $gray-2;
+  border-radius: 0 0 $--border-radius-base $--border-radius-base;
+}
+.fixed-dialog {
+  .el-dialog:not(.is-fullscreen) {
+    margin-top: 6vh !important;
+    margin-bottom: 6vh !important;
+    height: 88vh;
+    .el-dialog__body {
+      position: absolute;
+      top: 0px;
+      bottom: 58px;
+      left: 0;
+      right: 0;
+      overflow: auto;
+    }
+    .el-dialog__header ~.el-dialog__body {
+      top: 45px;
+    }
+    .el-dialog__footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  &.no-footer {
+    .el-dialog__body {
+      bottom: 0 !important;
+    }
+  }  
+}
+
+/** Table **/
+.el-table--border th, .el-table--border td {
+  border-right: 1px solid $gray-4;
+}
+.el-table th.is-leaf, .el-table td {
+  border-bottom: 1px solid $gray-4;
+}
+.el-table--group, .el-table--border {
+  border: 1px solid $gray-4;
+  border-right: none;
+  border-bottom: none;
+}
+
+/** 去边框颜色 **/
+.el-notification {
+  border-width: 0px; 
+}
+
+/** .Pagination **/
+.el-pagination.is-background {
+  .btn-prev,.btn-next {
+    background-color: $gray-3 !important;
+  }
+  .el-pager li:not(.active) {
+    background-color: $gray-3 !important;
+  }
+}
+
+
+.top-right-btn {
+	position: relative;
+	float: right;
+}

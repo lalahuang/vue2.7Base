@@ -1,0 +1,830 @@
+// $sideBarWidth: 208px; 菜单宽度
+// $navBarHeight: 72px 导航栏高度
+// $statusBarHeight 32px 状态栏高度
+// $headerTotalHeight 104 head总共。导航与状态相加
+// $tagviewBarHeight: 40px标签栏的高度
+// $centerViewPadding: 4% 居中模式两旁的留白
+// $centerViewWidth:92% 居中模式的总宽
+#app {
+  .app-wrapper {
+    @include clearfix;
+    position: relative;
+    height: 100%;
+    width: 100%;
+ 
+    // 内部留白
+    .container-fluid {
+      padding: 0 20px;
+    }    
+
+    &.app-noside {
+      background: none;
+      .app-main {
+        margin-left: 0 !important;
+      }
+    }
+    // 导航栏
+    .navbar-container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;     
+      background: #fff;
+      border-bottom: 1px solid $gray-4;
+      width: 100%;
+      transition: opacity 0.5s;
+      z-index: 1002;
+      // 修复在引导层(driver)下不显示的问题 
+      &.driver-fix-stacking {
+        position: static;
+      }
+      .navbar-project {
+        display: flex;
+        margin-left: 70px;
+        margin-right: 24px;
+        align-items: center;
+        float: left;
+        height: $navBarHeight;
+        line-height: $navBarHeight;
+        .navbar-project-title {
+          padding-left: 24px;
+          color: #555;
+          // background: linear-gradient(to bottom,#00174a 25%, #083e96 50%, #38495a 70%);
+          // -webkit-background-clip: text;
+          // -webkit-text-fill-color: transparent;
+          // text-align: center;
+          font-weight: 800;          
+        }
+      }
+    }
+    
+    // 状态栏
+    .statusbar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: $statusBarHeight;
+      background: $gray-3;
+      z-index: 1003;
+    }
+
+    // 标签栏
+    .tags-view-container {
+      position: fixed;
+      height: $tagviewBarHeight;
+      left: 0;
+      right: 0;
+      background: #fff;
+      z-index: 99;
+      .tags-view {
+        margin-left: $sideBarWidth;
+      }
+    }
+
+    // 主区域
+    .main-container {
+      position: absolute;
+      transition: margin-left .28s;
+      margin: 0 auto;
+      width: 100%;
+      top: $navBarHeight;
+      bottom: 0;
+      .app-main {
+        margin-left: $sideBarWidth;
+        padding-top: $tagviewBarHeight;
+        // height: 100%;
+        min-height: 100%;
+        position: relative;
+        overflow: hidden;
+        background: $--color-page-background;
+      }
+    }
+    
+    // &.mobile.open-sidebar {
+    //   position: fixed;
+    //   top: 0;
+    // }    
+       
+    // 迷你菜单模式
+    &.hide-sidebar {
+      .navbar-container {
+        .navbar-project {
+          margin-left: 20px;
+        }
+      }
+      .sidebar-container {
+        padding-top: 8px;
+        width: 64px !important;
+      }    
+      .submenu-title-noDropdown {
+        padding: 0 !important;
+        position: relative;
+  
+        .el-tooltip {
+          padding: 0 !important;  
+          .svg-icon {
+            margin-left: 20px;
+          }  
+          .sub-el-icon {
+            margin-left: 19px;
+          }
+        }
+      }  
+      .el-submenu {
+        overflow: hidden;  
+        &>.el-submenu__title {
+          padding: 0 !important; 
+          .svg-icon {
+            margin-left: 20px;
+          }
+          .sub-el-icon {
+            margin-left: 19px;
+          }
+          .el-submenu__icon-arrow {
+            display: none;
+          }
+        }
+      } 
+      .el-menu--collapse {
+        .el-submenu {
+          &>.el-submenu__title {
+            &>span {
+              height: 0;
+              width: 0;
+              overflow: hidden;
+              visibility: hidden;
+              display: inline-block;
+            }
+          }
+        }
+      }        
+      .tags-view-container {
+        .tags-view {
+          margin-left: 64px;
+        }
+      }
+      .app-main {
+        margin-left: 64px;
+      }
+    }
+  
+    // 开启居中模式
+    &.center-wrapper {
+      .container-fluid {
+        padding: 0 $centerViewPadding;
+      }
+      .sidebar-container {
+        // width: 96%;
+        left: $centerViewPadding;
+      }
+      .tags-view-container {
+        left: $centerViewPadding;
+        right: $centerViewPadding;
+      }
+      .main-container {
+        width: $centerViewWidth;
+        margin: 0 $centerViewPadding;
+        .app-main {          
+          margin-left: $sideBarWidth;
+          .app-container {
+            margin: 0;
+            min-height: calc(100vh - 112px);
+          }
+        }       
+      }
+
+      // 迷你菜单模式
+      &.hide-sidebar {
+        .tags-view-container {
+          .tags-view {
+            margin-left: 64px;
+          }
+        }
+        .app-main {
+          margin-left: 64px;
+        }
+      }
+    }
+  
+    // 开启顶部状态栏
+    &.show-statusbar {
+      .navbar-container {
+        top: $statusBarHeight;
+        .topmenu-container {
+          margin-left: 200px;
+        }
+      }
+      .app-main {
+        // min-height: calc(100vh - 136px);
+        min-height: 100%;
+        .app-container {
+          margin: 24px 24px 0 24px;
+          // padding: 24px;
+          background: #ffffff;
+          min-height: calc(100vh - 168px);
+        }
+      }
+      .main-container {
+        top: $headerTotalHeight;
+      }
+      .sidebar-container {
+        // top: 72px; top原值是72
+        top: $headerTotalHeight;
+      }
+      .tags-view-container {
+        top: $headerTotalHeight;
+      }
+    } 
+
+    // 开启顶部栏&迷你菜单
+    &.show-statusbar.hide-sidebar {
+      .navbar-container {
+        top: $statusBarHeight;
+        .topmenu-container {
+          margin-left: 100px;
+        }
+      }     
+    }
+
+    // 开启居中模式 & 开启顶部状态栏
+    &.show-statusbar.center-wrapper {
+      .main-container {
+        .app-main {
+          .app-container {
+            min-height: calc(100vh - 144px);
+          }
+        }
+
+      }
+    }
+    
+    // 通用皮肤
+    &[class*="skin-"] {
+      // 菜单栏
+      .navbar-container {
+        .topmenu-container {
+          margin-left: 0px;
+        }
+      }  
+
+      // 测边栏
+      .sidebar-container {  
+        top: 0;
+        z-index: 1011;
+        .statusbar {
+          margin-left: $sideBarWidth;
+        }  
+        .sidebar-header {
+          display: block;
+          height: $navBarHeight;
+          .sidebar-mini-logo {
+            display: none;
+          }
+          .sidebar-logo {
+            display: block;
+          }
+        } 
+        .el-scrollbar {
+          position: absolute;
+          top: 56px;
+          margin-top: $navBarHeight;
+          left: 0;
+          right: 0;
+          bottom: 0;    
+          height: auto; 
+        }        
+
+      }  
+      
+      &:not(.app-noside) {
+        .statusbar-container {
+          margin-left: $sideBarWidth;
+        }
+      }
+      // Logo
+      &:not(.app-noside) {
+        .navbar-container {
+          .navbar {
+            margin-left: $sideBarWidth;
+            .navbar-project {
+              margin-left: 0px;          
+              .navbar-project-title {
+                padding-left: 0;
+              }
+            }
+          }       
+          .logo {
+            visibility: hidden;
+            // display: none; // 不显示nav里的logo
+          }
+        } 
+      }
+ 
+    }
+
+    // 深色菜单皮肤
+    &.skin-dark {
+      // 测边栏
+      .sidebar-container {  
+        background-color: $color-chint-dark;    
+        .el-menu {
+          background-color: $color-chint-dark; 
+        }        
+        // new chint p
+        .el-menu-item {
+          color: rgba(255, 255, 255, 0.6);
+          &.is-active { // 一级菜单选中的效果
+            color: #a7caf4;
+            border-right: 4px solid #237ae4;
+            i {
+              color: #7bafef;
+            }
+          }
+          &:focus {
+            background-color: rgba(255,255,255,0.03);
+          }
+        }
+    
+        // menu hover
+        .submenu-title-noDropdown,
+        .el-submenu__title { 
+          color: #fff;
+          &:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+          }
+          i { //icon
+            color: #fff;
+          }
+        }
+        .is-active>.el-submenu__title { //选中子菜单时对应 父菜单的样式
+          color: #a7caf4 !important; 
+          background: rgba(255,255,255,0.05);
+          i {
+            color: #7bafef !important; 
+          }
+        }
+    
+        & .nest-menu .el-submenu>.el-submenu__title,
+        & .el-submenu .el-menu-item {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          // background-color: $color-chint-dark !important;
+          &:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+          }
+        }
+      }  
+      // 伸缩按钮
+      .menu-bottom {
+        i {
+          color: rgba(255,255,255,0.9);
+        }
+        &:before {
+          border: 1px solid rgba(255,255,255, 0.07);
+          background: rgba(255,255,255, 0.33);
+          box-shadow: $--box-shadow-light;   
+        }
+      }   
+    }
+    
+    // 深色/mini菜单模式
+    &[class*="skin-"].hide-sidebar {
+      // navbar
+      &:not(.app-noside) {
+        .navbar-container {
+          .navbar {
+            margin-left: 64px;
+          }
+          // z-index: 1012;
+          .logo {
+            .logo-image {         
+              display: none;   
+            }
+          }
+        }
+    }
+      
+      //statusbar-container
+      .statusbar-container {
+        margin-left: 0;
+        .statusbar {
+          margin-left: 64px;         
+        }
+      }   
+      .sidebar-container {
+        padding: 0px;        
+        .sidebar-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 16px;
+          height: $navBarHeight;    
+          background-color: rgba(255,255,255, 0.1);
+          .sidebar-logo {
+            display: none;
+          }
+          .sidebar-mini-logo {
+            display: inline-block;            
+          }
+        }
+      }
+    }
+
+    //深色
+    &.skin-dark.hide-sidebar {
+      .sidebar-container {
+        .sidebar-header {
+          background-color: rgba(35,122,228, 1);
+        }
+      }
+    }
+    // 深色/居中
+    &[class*="skin-"].center-wrapper {
+      .statusbar-container {
+        .sub-logo {
+            padding-left: 20px;
+        }
+      }
+      .navbar-container {
+        .navbar-project {
+          padding-left: 24px;
+        }    
+      }
+    }
+
+    // 深色菜单/迷你菜单/状态栏显示
+    &[class*="skin-"].show-statusbar.hide-sidebar {
+      .sidebar-container {      
+        .sidebar-header {
+          height: $headerTotalHeight;          
+        }
+      }
+    }
+
+    // 深色菜单皮肤
+    &.skin-chint-green {
+      // 测边栏
+      .sidebar-container {  
+        background-color: $green-chint-primary;  
+        .el-menu {
+          background-color: $green-chint-primary; 
+        }        
+        // new chint p
+        .el-menu-item {
+          color: rgba(255, 255, 255, 0.6);
+          &.is-active { // 一级菜单选中的效果
+            color: #4DEE71;
+            border-right: 4px solid #94FF70;
+            i {
+              color:#4DEE71;
+            }
+          }
+          &:focus {
+            background-color: rgba(255,255,255,0.03);
+          }
+        }
+    
+        // menu hover
+        .submenu-title-noDropdown,
+        .el-submenu__title { 
+          color: #fff;
+          &:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+          }
+          i { //icon
+            color: #fff;
+          }
+        }
+        .is-active>.el-submenu__title { //选中子菜单时对应 父菜单的样式
+          color: #4DEE71 !important; 
+          background: rgba(255,255,255,0.05);
+          i {
+            color: #4DEE71 !important; 
+          }
+        }
+    
+        & .nest-menu .el-submenu>.el-submenu__title,
+        & .el-submenu .el-menu-item {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          // background-color: $color-chint-dark !important;
+          &:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+          }
+        }
+      }  
+      // 伸缩按钮
+      .menu-bottom {
+        i {
+          color: rgba(255,255,255,0.9);
+        }
+        &:before {
+          border: 1px solid rgba(255,255,255, 0.07);
+          background: rgba(255,255,255, 0.33);
+          box-shadow: $--box-shadow-light;   
+        }
+      }   
+    }
+
+    // 深色皮肤
+    &.skins-chint-blue {
+      .navbar-container {
+        background-color: #1E54AC;
+        height: 72px;
+        border-bottom: 8px solid #29C1FE;
+        box-sizing: border-box;
+        // logo
+        .logo {
+          .logo-image {
+            top: 22px;
+            width: 100px;
+            height: 20px;;
+            background-image: url("~@/assets/images/logo_white.png");
+          }
+        }
+        .navbar-project {
+          position: relative;
+          display: block;
+          margin-left: 100px;
+          &:before {
+            position: absolute;
+            content: ' ';
+            left: 8px;
+            top: 22px;
+            height: 20px;
+            border-left: 1px solid rgba(255,255,255,0.1);
+          }
+          // 标题 
+          .navbar-project-title {
+            color: rgba(255, 255, 255, 1);
+            // text-shadow: 0 0 20px #0aafe6, 0 0 20px rgba(10, 175, 230, 0);
+            // box-shadow: 0 0 0 rgba(10, 175, 230, 0), inset 0 0 0 rgba(10, 175, 230, 0);   
+            background: -webkit-linear-gradient(-45deg,white 0%, #fff 60%,#87FDFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;  
+            height: 64px;
+            line-height: 64px;               
+          }
+        }
+        .topmenu-container {
+          .el-menu-item, .el-submenu {
+            color: #fff;
+            border-bottom: 8px solid transparent;
+            &:hover, &:focus {
+              color: rgba(255, 255, 255, 0.5);
+              background: rgba(255, 255, 255, 0);
+            }
+            &.is-active, &.is-opened {
+              color: rgba(255, 255, 255, 0.5);
+              border-bottom: 8px solid rgba(0, 0, 0, 0.13333);
+            }
+          }
+          .el-submenu {
+            .el-submenu__title {
+              &:hover, &:focus {
+                color: rgba(255, 255, 255, 0.5);
+                background: rgba(255, 255, 255, 0);
+              }
+              span, i {
+                color: #fff;
+              }           
+            }
+          }
+        }
+        .right-menu {
+          .right-menu-item {
+            height: 64px;
+            line-height: 64px;
+            color: #fff;
+            i {
+              color: rgba(255,255,255,0.667);
+            }
+          }
+          .avatar-wrapper {
+            margin-top: 12px;
+            .user-avatar {
+              border: 1px solid rgba(255,255,255,0.1);
+            }
+          }
+          sup {
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+        }
+      }
+
+      // 左侧菜单
+      .sidebar-container {
+        padding-top: 8px;
+
+      }
+    }
+
+  }
+  // 菜单
+  // .main-menu-ul {
+  //   margin-left: 236px;
+  //   float: left;
+  //   border-bottom-width: 0;
+  //   .el-menu-item {
+  //     height: 71px;
+  //     line-height: 71px;
+  //     font-size: 16px;
+  //     color: $gray-9;
+  //   }
+  // }
+
+  .sidebar-container {
+    position: fixed;
+    padding-top: 16px;
+    transition: width 0.28s;
+    // width: $sideBarWidth !important;
+    // height: 100%;    
+    font-size: 0px;
+    top: $navBarHeight;
+    bottom: 0;
+    z-index: 1001;
+    overflow: hidden;
+    width: $sideBarWidth;  
+    background-color: #fff;
+    box-shadow: $--box-shadow-light;
+    // reset element-ui css
+    .sidebar-header {
+      display: none;
+      .sidebar-logo {
+        padding-left: 20px;
+        .logo-image {
+          position: absolute;
+          top: 0;
+          width: 130px;
+          height: 98px;
+          background-image: url("~@/assets/images/logo.png");
+          background-size: 100%;
+          background-repeat: no-repeat;
+          // z-index: 99999;          
+        }      
+      }
+      .sidebar-mini-logo {
+        .logo-image {
+          width: 64px;
+          height: 64px;
+          background-image: url("~@/assets/images/logo_chint_mini.png");
+        }
+      }
+    }
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+      .el-scrollbar__wrap {
+        overflow-x: hidden;
+      }
+    }
+
+    // &.has-logo {
+    //   .el-scrollbar {
+    //     height: calc(100% - 50px);
+    //   }
+    // }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .svg-icon {
+      margin-right: 16px;
+    }
+
+    .sub-el-icon {
+      margin-right: 12px;
+      margin-left: -2px;
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+    }
+
+    // new chint p
+    .el-menu-item {
+      height: 44px;
+      line-height: 44px;
+      color: $gray-8;
+      @include text-ellipsis();
+      &.is-active {
+        color: $menuActiveText;
+        border-right: 2px solid $menuActiveText;
+      }
+    }
+
+    // menu hover
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+      color: $gray-8;
+      &:hover {
+        background-color: $menuHover !important;
+      }
+    }
+    .is-active>.el-submenu__title {
+      color: $subMenuActiveText !important; 
+      i {
+        color: $subMenuActiveText !important; 
+      }
+    }
+
+    & .nest-menu .el-submenu>.el-submenu__title,
+    & .el-submenu .el-menu-item {
+      min-width: $sideBarWidth !important;
+      background-color: $subMenuBg !important;
+      &:hover {
+        background-color: $subMenuHover !important;
+      }
+    }
+  }
+
+  .el-menu--collapse .el-menu .el-submenu {
+    min-width: $sideBarWidth !important;
+  }
+
+  // mobile responsive
+  .mobile {
+    .main-container {
+      margin-left: 0px;
+    }
+
+    .sidebar-container {
+      transition: transform .28s;
+      width: $sideBarWidth !important;
+    }
+
+    &.hide-sidebar {
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+    }
+  }
+
+  .withoutAnimation {
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+
+}
+
+// when menu collapsed
+.el-menu--vertical {
+  &>.el-menu {
+    .svg-icon {
+      margin-right: 16px;
+    }
+    .sub-el-icon {
+      margin-right: 12px;
+      margin-left: -2px;
+    }
+  }
+
+  .nest-menu .el-submenu>.el-submenu__title,
+  .el-menu-item {
+    &:hover {
+      // you can use $subMenuHover
+      background-color: $menuHover !important;
+    }
+  }
+
+  // the scroll bar appears when the subMenu is too long
+  >.el-menu--popup {
+    max-height: 100vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #99a9bf;
+      border-radius: 20px;
+    }
+  }
+}

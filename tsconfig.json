@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "outDir": "./",
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": false,
+    "jsx": "preserve",
+    "allowJs": true, // 允许编译器编译JS，JSX文件
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom","es5", "es6", "dom.iterable"],
+    "baseUrl": "./",
+    "paths": {
+      // 配置具体如何解析 require/import 的导入，值是基于 baseUrl 路径的映射列表。https://www.typescriptlang.org/tsconfig#paths
+      "@/*": ["src/*"],
+      "@types/*": ["src/@types/*"]
+      // ...
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "src/**/*.vue",
+    "src/**/*.ts",
+    "auto-imports.d.ts"
+  ],
+  "exclude": [
+    "node_modules","dist","html","public","bin"
+  ],
+  "vueCompilerOptions": {
+    "target": 2.7
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
